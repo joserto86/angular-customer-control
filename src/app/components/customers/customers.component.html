@@ -1,0 +1,135 @@
+<!-- Buttons -->
+<section id="actions" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a
+          href="#"
+          class="btn btn-primary btn-block"
+          data-bs-toggle="modal"
+          data-bs-target="#addCustomerModal"
+        >
+          <i class="fas fa-plus"></i> Agregar cliente
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Listado -->
+<section id="clientes">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+            <h4>Listado de Clientes</h4>
+          </div>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Saldo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of customers; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ customer.name }} {{ customer.surname }}</td>
+                <td>{{ customer.money | currency }}</td>
+                <td>
+                  <a
+                    routerLink="/customer/edit/{{ customer.id }}"
+                    class="btn btn-secondary"
+                  >
+                    <i class="fas fa-angle-double-right"></i> Editar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tarjetas laterales -->
+      <div class="col-md-3">
+        <div class="card text-center bg-danger text-white mb-3">
+          <div class="card-body">
+            <h3>Saldo Total</h3>
+            <h4 class="display-4">{{ getTotalCurrency() | currency }}</h4>
+          </div>
+        </div>
+
+        <div class="card text-center bg-success text-white mb-3">
+          <div class="card-body">
+            <h3>Total Clientes</h3>
+            <h4 class="display-4">
+              <i class="fas fa-users"></i> {{ customers?.length }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal agregar cliente -->
+
+<div class="modal fade" id="addCustomerModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Agregar Cliente</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <flash-messages></flash-messages>
+      <form
+        #customerForm="ngForm"
+        (ngSubmit)="addCustomer(customerForm)"
+      >
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              id="nameInput"
+              class="form-control"
+              #name="ngModel"
+              [(ngModel)]="customer.name"
+              [ngClass]="{ 'is-invalid': name.errors && name.touched }"
+              required
+              minlength="3"
+            />
+            <div [hidden]="!name.errors?.['required']" class="invalid-feedback">
+              Nombre es obligatorio
+            </div>
+            <div [hidden]="!name.errors?.['minlength']" class="invalid-feedback">
+              La longitud minima es de dos caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="surname">Apellido</label>
+            <input type="text" name="surname" id="" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="money">Saldo</label>
+            <input type="number" name="money" id="" class="form-control" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

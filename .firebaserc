@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "control-clientes-1ca7b": {
+      "hosting": {
+        "angular-customer-control": [
+          "control-clientes-1ca7b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "control-clientes-1ca7b"
+  }
+}
