@@ -29,4 +29,8 @@ export class CustomerService {
         );
         return this.customers$;
     }
+
+    addCustomer(customer:Customer) {
+        this.customerCollection.add(customer);
+    }
 }
