@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FlashMessagesModule } from 'flash-messages-angular';
 import { LoginService } from './services/login.service';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { LoginService } from './services/login.service';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [CustomerService, LoginService],
+  providers: [CustomerService, LoginService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
