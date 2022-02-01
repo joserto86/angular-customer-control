@@ -50,4 +50,14 @@ export class CustomerService {
         );
         return this.customer$;
     }
+
+    editCustomer(customer:Customer) {
+        this.customerDoc = this.db.doc(`customer/${customer.id}`);
+        this.customerDoc.update(customer);
+    }
+
+    removeCustomer(customer:Customer) {
+        this.customerDoc = this.db.doc(`customer/${customer.id}`);
+        this.customerDoc.delete();
+    }
 }

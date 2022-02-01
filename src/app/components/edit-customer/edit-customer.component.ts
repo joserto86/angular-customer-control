@@ -43,11 +43,22 @@ export class EditCustomerComponent implements OnInit {
   }
 
   saveCustomer(f:NgForm) {
-
+    if (!f.valid) {
+      this.flashMessages.show('Todos los campos son obligatorios', {
+        cssClass: 'alert-danger', timeout: 4000
+      });
+    } else {
+      f.value.id = this.id;
+      this.customerService.editCustomer(f.value);
+      this.router.navigate(['/']);
+    }
   }
 
   removeCustomer() {
-
+    if(confirm('¿Está seguro de que desea eliminar el cliente?')) {
+      this.customerService.removeCustomer(this.customer);
+      this.router.navigate(['/']);
+    }
   }
 
 }
