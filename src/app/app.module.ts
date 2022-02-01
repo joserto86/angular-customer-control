@@ -20,6 +20,7 @@ import { AngularFirestoreModule, AngularFirestore, } from '@angular/fire/compat/
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FlashMessagesModule } from 'flash-messages-angular';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { FlashMessagesModule } from 'flash-messages-angular';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [CustomerService],
+  providers: [CustomerService, LoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
