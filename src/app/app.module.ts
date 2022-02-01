@@ -16,12 +16,13 @@ import { ConfigComponent } from './components/config/config.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CustomerService } from './services/customer.service';
-import { AngularFirestoreModule, AngularFirestore, } from '@angular/fire/compat/firestore'
+import { AngularFirestoreModule, AngularFirestore, SETTINGS, } from '@angular/fire/compat/firestore'
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FlashMessagesModule } from 'flash-messages-angular';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './guard/auth.guard';
+import { ConfigService } from './services/config.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { AuthGuard } from './guard/auth.guard';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [CustomerService, LoginService, AuthGuard],
+  providers: [CustomerService, LoginService, AuthGuard, ConfigService, { provide: SETTINGS, useValue:{} }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

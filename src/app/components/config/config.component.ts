@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Config } from 'src/app/model/config.model';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-config',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigComponent implements OnInit {
 
-  constructor() { }
+  allowRegister?:boolean = false;
+  
+  constructor(private router: Router,
+              private configService: ConfigService
+  ) { }
 
   ngOnInit(): void {
+    this.configService.getConfig().subscribe(
+      (data: Config | undefined) => {
+        if (data) {
+          this.allowRegister = data.allowRegister as boolean;
+        }
+      }
+    )
   }
 
+  save() {
+    let config = {allowRegister: this.allowRegister};
+    this.configService.editConfig(config);
+    this.router.navigate(['/']);
+  }
 }
