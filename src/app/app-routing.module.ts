@@ -7,11 +7,12 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TableComponent } from './components/table/table.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ConfigGuard } from './guard/config.guard';
 
 const routes: Routes = [
   {path: '', component: TableComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent, canActivate: [ConfigGuard]},
   {path: 'config', component: ConfigComponent, canActivate: [AuthGuard]},
   {path: 'customer/edit/:id', component: EditCustomerComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundComponent},

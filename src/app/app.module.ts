@@ -23,6 +23,7 @@ import { FlashMessagesModule } from 'flash-messages-angular';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './guard/auth.guard';
 import { ConfigService } from './services/config.service';
+import { ConfigGuard } from './guard/config.guard';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,13 @@ import { ConfigService } from './services/config.service';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [CustomerService, LoginService, AuthGuard, ConfigService, { provide: SETTINGS, useValue:{} }],
+  providers: [
+    CustomerService, 
+    LoginService, 
+    AuthGuard,
+    ConfigGuard, 
+    ConfigService, 
+    { provide: SETTINGS, useValue:{} }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
